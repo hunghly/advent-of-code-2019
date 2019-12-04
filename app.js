@@ -138,8 +138,8 @@ let getAllFuelRecursive = function (modules) {
 
 
 //DAY 2
-// let intCodeArrayBackup = [1,0,0,3,1,1,2,3, 1,3,4,3,1,5,0,3,2,13,1,19,1,10,19,23,1,23,9,27,1,5,27,31,2,31,13,35,1,35,5,39,1,39,5,43,2,13,43,47,2,47,10,51,1,51,6,55,2,55,9,59,1,59,5,63,1,63,13,67,2,67,6,71,1,71,5,75,1,75,5,79,1,79,9,83,1,10,83,87,1,87,10,91,1,91,9,95,1,10,95,99,1,10,99,103,2,103,10,107,1,107,9,111,2,6,111,115,1,5,115,119,2,119,13,123,1,6,123,127,2,9,127,131,1,131,5,135,1,135,13,139,1,139,10,143,1,2,143,147,1,147,10,0,99,2,0,14,0];
-let intCodeArray = [1,12,2,3,1,1,2,3, 1,3,4,3,1,5,0,3,2,13,1,19,1,10,19,23,1,23,9,27,1,5,27,31,2,31,13,35,1,35,5,39,1,39,5,43,2,13,43,47,2,47,10,51,1,51,6,55,2,55,9,59,1,59,5,63,1,63,13,67,2,67,6,71,1,71,5,75,1,75,5,79,1,79,9,83,1,10,83,87,1,87,10,91,1,91,9,95,1,10,95,99,1,10,99,103,2,103,10,107,1,107,9,111,2,6,111,115,1,5,115,119,2,119,13,123,1,6,123,127,2,9,127,131,1,131,5,135,1,135,13,139,1,139,10,143,1,2,143,147,1,147,10,0,99,2,0,14,0];
+let intCodeArray= [1,0,0,3,1,1,2,3, 1,3,4,3,1,5,0,3,2,13,1,19,1,10,19,23,1,23,9,27,1,5,27,31,2,31,13,35,1,35,5,39,1,39,5,43,2,13,43,47,2,47,10,51,1,51,6,55,2,55,9,59,1,59,5,63,1,63,13,67,2,67,6,71,1,71,5,75,1,75,5,79,1,79,9,83,1,10,83,87,1,87,10,91,1,91,9,95,1,10,95,99,1,10,99,103,2,103,10,107,1,107,9,111,2,6,111,115,1,5,115,119,2,119,13,123,1,6,123,127,2,9,127,131,1,131,5,135,1,135,13,139,1,139,10,143,1,2,143,147,1,147,10,0,99,2,0,14,0];
+// let intCodeArray = [1,12,2,3,1,1,2,3, 1,3,4,3,1,5,0,3,2,13,1,19,1,10,19,23,1,23,9,27,1,5,27,31,2,31,13,35,1,35,5,39,1,39,5,43,2,13,43,47,2,47,10,51,1,51,6,55,2,55,9,59,1,59,5,63,1,63,13,67,2,67,6,71,1,71,5,75,1,75,5,79,1,79,9,83,1,10,83,87,1,87,10,91,1,91,9,95,1,10,95,99,1,10,99,103,2,103,10,107,1,107,9,111,2,6,111,115,1,5,115,119,2,119,13,123,1,6,123,127,2,9,127,131,1,131,5,135,1,135,13,139,1,139,10,143,1,2,143,147,1,147,10,0,99,2,0,14,0];
 
 let testArray = [1, 0, 0, 0, 99];
 let testArray2 = [2, 3, 0, 3, 99];
@@ -150,7 +150,7 @@ let testArray4 = [2, 4, 4, 5, 99, 0];
 //     console.log(elem);
 // }
 
-let correctProgram = function (intCodeInputArray) {
+/*let correctProgram = function (intCodeInputArray) {
     let currentIndex = 0;
     let firstVarPosition;
     let secondVarPosition;
@@ -172,10 +172,42 @@ let correctProgram = function (intCodeInputArray) {
         currentIndex +=4;
     }
     return intCodeInputArray;
-};
+};*/
 
 // console.log(correctProgram(testArray));
 // console.log(correctProgram(testArray2));
 // console.log(correctProgram(testArray3));
 // console.log(correctProgram(testArray4));
 // console.log(correctProgram(intCodeArray));
+
+let correctProgram = function (intCodeInputArray, noun, verb) {
+    let instructionPointer = 0;
+    // let firstVarPosition;
+    // let secondVarPosition;
+    let outputPosition;
+    let total = 0;
+    // if Op Code is 99, then break loop
+    while (intCodeInputArray[instructionPointer] !== 99) {
+        intCodeInputArray[instructionPointer+1] = noun;
+        intCodeInputArray[instructionPointer+2] = verb;
+        outputPosition = intCodeInputArray[instructionPointer+3];
+        // if Op Code is 1, then add
+        if (intCodeInputArray[instructionPointer] === 1) {
+            intCodeInputArray[outputPosition] = noun + verb;
+            console.log(total);
+            total += intCodeInputArray[outputPosition];
+        }
+        // if Op Code is 2, then multiply
+        else if (intCodeInputArray[instructionPointer] === 2) {
+            intCodeInputArray[outputPosition] = noun * verb;
+            total += intCodeInputArray[outputPosition];
+        }
+        instructionPointer +=4;
+    }
+    intCodeInputArray[0] = total;
+    console.log(intCodeInputArray);
+    return intCodeInputArray;
+};
+
+correctProgram(intCodeArray, 90, 98);
+// correctProgram(intCodeArray, 22, 2);
