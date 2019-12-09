@@ -42,12 +42,12 @@ Your puzzle input is 245318-765747.*/
     // checkPassword(111111);
     // checkPassword(223450);
     // checkPassword(123789);
-    let totalMetPasswords = 0;
+/*    let totalMetPasswords = 0;
     for (let i = 245318; i <= 765747; i++) {
         if (checkPassword(i)) {
             totalMetPasswords++;
         }
-    }
+    }*/
     console.log("Total met passwords is: " + totalMetPasswords);
 
 })();
